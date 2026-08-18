@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow | Productivity Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <span>✓</span>
+                TaskFlow
+            </div>
+
+            <p class="tagline">
+                Stay organized. Stay productive.
+            </p>
+
+            <nav>
+
+                <button class="nav-item active" onclick="showAllTasks()">
+                    📋 All Tasks
+                </button>
+
+                <button class="nav-item" onclick="filterTasks('pending')">
+                    ⏳ Pending
+                </button>
+
+                <button class="nav-item" onclick="filterTasks('completed')">
+                    ✅ Completed
+                </button>
+
+                <button class="nav-item" onclick="filterTasks('High')">
+                    🔥 High Priority
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- Main -->
+        <main class="main">
+
+            <!-- Header -->
+            <header class="header">
+
+                <div>
+
+                    <p class="welcome">
+                        Welcome back 👋
+                    </p>
+
+                    <h1>
+                        My Tasks
+                    </h1>
+
+                    <p class="subtitle">
+                        Organize your work and get things done.
+                    </p>
+
+                </div>
+
+                <button
+                    class="add-task-btn"
+                    onclick="openModal()"
+                >
+                    + Add Task
+                </button>
+
+            </header>
+
+
+            <!-- Statistics -->
+            <section class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📋
+                    </div>
+
+                    <div>
+                        <p>Total Tasks</p>
+                        <h2 id="totalTasks">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ⏳
+                    </div>
+
+                    <div>
+                        <p>Pending</p>
+                        <h2 id="pendingTasks">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <div>
+                        <p>Completed</p>
+                        <h2 id="completedTasks">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🔥
+                    </div>
+
+                    <div>
+                        <p>High Priority</p>
+                        <h2 id="highTasks">0</h2>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Search and Filter -->
+            <section class="controls">
+
+                <div class="search-box">
+
+                    🔍
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search tasks..."
+                        oninput="renderTasks()"
+                    >
+
+                </div>
+
+
+                <select
+                    id="priorityFilter"
+                    onchange="renderTasks()"
+                >
+
+                    <option value="all">
+                        All Priorities
+                    </option>
+
+                    <option value="High">
+                        High
+                    </option>
+
+                    <option value="Medium">
+                        Medium
+                    </option>
+
+                    <option value="Low">
+                        Low
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <!-- Tasks -->
+            <section>
+
+                <div class="section-heading">
+
+                    <h2>
+                        Tasks
+                    </h2>
+
+                    <span id="taskCount">
+                        0 tasks
+                    </span>
+
+                </div>
+
+                <div
+                    id="taskContainer"
+                    class="task-container"
+                ></div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Add/Edit Task Modal -->
+    <div
+        id="taskModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 id="modalTitle">
+                    Add New Task
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="taskForm">
+
+                <input
+                    type="hidden"
+                    id="taskId"
+                >
+
+
+                <label>
+                    Task Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="e.g. Complete Java assignment"
+                    required
+                >
+
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    placeholder="Add some details..."
+                ></textarea>
+
+
+                <div class="form-row">
+
+                    <div>
+
+                        <label>
+                            Priority
+                        </label>
+
+                        <select id="priority">
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                            <option
+                                value="Medium"
+                                selected
+                            >
+                                Medium
+                            </option>
+
+                            <option value="High">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Due Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dueDate"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    Save Task
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
